@@ -1,27 +1,21 @@
-class Trainer {
-  name
-  team
-
-  constructor(name) {
-    this.name = name
-    this.team = []
-  }
-}
+import { Trainer } from './classes/Trainer.js'
+import Pokedex from './data/pokedex.js'
 
 const trainer = new Trainer('Ash')
 
-window.trainerList = []
-window.trainerList.push(trainer)
+console.log(Pokedex[0].id)
+
+window.trainerList = {}
+window.trainerList[trainer.id] = trainer
 
 function renderTrainers() {
   const trainerListElement = document.getElementById('TrainerList')
-  const trainerListElements = window.trainerList.map((trainer) => {
+  Object.values(window.trainerList).forEach((trainer) => {
     const li = document.createElement('li')
+    li.setAttribute('id', trainer.id)
     li.innerHTML = trainer.name
-    return li
+    trainerListElement.appendChild(li)
   })
-
-  trainerListElement.appendChild(...trainerListElements)
 }
 
 renderTrainers()
