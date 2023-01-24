@@ -1,6 +1,6 @@
-import { Pokedex } from './components/Pokedex.js'
-import { Trainer } from './components/Trainer.js'
-import { TrainerList } from './components/TrainerList.js'
+import { Pokedex } from './classes/Pokedex.js'
+import { Trainer } from './classes/Trainer.js'
+import { TrainerList } from './classes/TrainerList.js'
 
 const trainerNameInput = document.getElementById('trainer-name')
 const pokemonSearchInput = document.getElementById('pokemon-search')
