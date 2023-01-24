@@ -9,23 +9,47 @@
   </head>
 
   <body>
-    <header class="center padding-2">
+    <header class="title">
       <h1>Welcome to Pokémon World</h1>
     </header>
     <hr />
-    <main class="grid-container grid-columns-3">
-      <section class="padding-1">
-        <h2 class="padding-1">Trainers</h2>
+    <main class="main">
+      <section class="section">
+        <h2 class="section-title">Trainers</h2>
         <form>
-          <input type="text" name="name" id="name" />
-          <button>Register Trainer</button>
+          <label for="trainer-name small">Trainer Name:</label>
+          <input type="text" class="form-control" id="trainer-name" />
+          <button class="btn btn-danger" onclick="registerTrainer(event)">
+            Register Trainer
+          </button>
         </form>
-        <ul class="padding-1" id="TrainerList"></ul>
+        <ul class="padding-1" id="trainer-list"></ul>
       </section>
-      <section class="padding-1">
-        <h2 class="padding-1">Trainer Card</h2>
+      <section class="section">
+        <h2 class="section-title">Trainer Card</h2>
       </section>
-      <section class="padding-1"><h2 class="padding-1">Pokédex</h2></section>
+      <section class="section">
+        <h2 class="section-title">Pokédex</h2>
+        <form class="form-group">
+          <form>
+            <label for="trainer-name small">Search Pokémon:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pokemon-search"
+              onkeyup="searchPokemon(event)"
+            />
+            <button
+              type="button"
+              onclick="clearSearch()"
+              class="btn btn-outline-danger"
+            >
+              X
+            </button>
+          </form>
+        </form>
+        <ul class="padding-1" id="pokedex"></ul>
+      </section>
     </main>
   </body>
 </html>
