@@ -21,6 +21,11 @@ window.registerTrainer = (event) => {
   }
 }
 
+window.showTrainerCard = (id) => {
+  trainerList.select(id)
+  trainerList.active.renderTrainerCard(document.getElementById('trainer-card'))
+}
+
 window.searchPokemon = (event) => {
   pokedex.searchByName(event.target.value)
 }

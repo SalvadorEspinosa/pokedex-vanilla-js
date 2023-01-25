@@ -11,4 +11,8 @@ export class TrainerList {
     this.list[trainer.id] = trainer
     this.element.appendChild(trainer.element)
   }
+
+  select(id) {
+    this.active = this.list[id]
+  }
 }
