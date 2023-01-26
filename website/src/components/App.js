@@ -55,10 +55,11 @@ export class App {
 
   addPokemonToTeamHandler(event) {
     event.preventDefault()
-    const pokemon = this.pokedex.getPokemonById(Number(event.currentTarget.id))
+    const pokemonData = this.pokedex.getPokemonDataById(
+      Number(event.currentTarget.id)
+    )
     if (this.trainerList.selectedTrainer.team.length < MAX_TEAM_SIZE) {
-      this.trainerList.selectedTrainer.team.push(pokemon)
-      this.trainerList.renderTrainerCard(this.trainerList.selectedTrainer.id)
+      this.trainerList.selectedTrainer.choose(pokemonData)
     }
   }
 }

@@ -74,6 +74,13 @@ h6 {
   cursor: pointer;
 }
 
+#trainer-card ol {
+  text-align: center;
+  list-style-position: inside;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 #pokedex > li {
   align-items: center;
   gap: 1rem;

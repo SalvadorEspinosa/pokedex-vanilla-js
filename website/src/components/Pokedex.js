@@ -1,5 +1,6 @@
 import PokemonData from '../data/pokedex.js'
 import { PokedexEntry } from './PokedexEntry.js'
+
 export class Pokedex {
   element
   list = {}
@@ -33,7 +34,7 @@ export class Pokedex {
     })
   }
 
-  getPokemonById(id) {
-    return new PokedexEntry(this.list[id].data)
+  getPokemonDataById(id) {
+    return this.list[id].data
   }
 }

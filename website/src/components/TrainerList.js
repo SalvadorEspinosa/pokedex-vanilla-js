@@ -24,23 +24,6 @@ export class TrainerList {
     this.selectedTrainer = this.list[trainerId]
     const element = document.getElementById('trainer-card')
     element.innerHTML = ''
-    const title = document.createElement('h4')
-    title.innerHTML = this.selectedTrainer.name
-    const id = document.createElement('h5')
-    id.innerHTML = `UID: ${this.selectedTrainer.id}`
-    element.appendChild(title)
-    element.appendChild(id)
-    const team = document.createElement('p')
-    if (this.selectedTrainer.team.length === 0) {
-      team.innerHTML = `Team: Trainer currently doesn't have any Pokémon`
-      element.appendChild(team)
-      const emptyTeam = document.createElement('p')
-      emptyTeam.innerHTML = 'Choose up to 6 pokemon from the Pokédex'
-      element.appendChild(emptyTeam)
-    } else {
-      this.selectedTrainer.team.forEach((pokemon) => {
-        element.appendChild(pokemon.element)
-      })
-    }
+    element.appendChild(this.selectedTrainer.trainerCard.element)
   }
 }
