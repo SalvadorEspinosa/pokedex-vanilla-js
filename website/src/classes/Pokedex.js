@@ -2,16 +2,19 @@ import PokemonData from '../data/pokedex.js'
 import { Pokemon } from './Pokemon.js'
 export class Pokedex {
   element
-  list
+  list = {}
 
-  constructor(element) {
-    this.list = PokemonData.map((pokemon) => new Pokemon(pokemon))
+  constructor(element, addToTeamHandler) {
+    PokemonData.forEach((pokemonData) => {
+      const pokemon = new Pokemon(pokemonData, addToTeamHandler)
+      this.list[pokemon.data.id] = pokemon
+    })
     this.element = this.element || element
     this.init()
   }
 
   searchByName(searchValue) {
-    const searchHits = this.list.filter((pokemon) =>
+    const searchHits = Object.values(this.list).filter((pokemon) =>
       pokemon.data.name.english
         .toLowerCase()
         .startsWith(searchValue.toLowerCase())
@@ -25,8 +28,12 @@ export class Pokedex {
 
   render(list) {
     this.element.innerHTML = ''
-    list.forEach((pokemon) => {
+    Object.values(list).forEach((pokemon) => {
       this.element.appendChild(pokemon.element)
     })
+  }
+
+  getPokemonById(id) {
+    return new Pokemon(this.list[id].data)
   }
 }

@@ -1,11 +1,11 @@
 import { Trainer } from './Trainer.js'
 export class TrainerList {
   element
-  list
+  list = {}
+  selectedTrainer
   showTrainerCardHandler
 
   constructor(element, showTrainerCardHandler) {
-    this.list = {}
     this.element = this.element || element
     this.showTrainerCardHandler = showTrainerCardHandler
   }
@@ -21,22 +21,26 @@ export class TrainerList {
   }
 
   renderTrainerCard(trainerId) {
-    const trainer = this.list[trainerId]
+    this.selectedTrainer = this.list[trainerId]
     const element = document.getElementById('trainer-card')
     element.innerHTML = ''
     const title = document.createElement('h4')
-    title.innerHTML = trainer.name
+    title.innerHTML = this.selectedTrainer.name
     const id = document.createElement('h5')
-    id.innerHTML = `UID: ${trainer.id}`
+    id.innerHTML = `UID: ${this.selectedTrainer.id}`
     element.appendChild(title)
     element.appendChild(id)
     const team = document.createElement('p')
-    if (trainer.team.length === 0) {
+    if (this.selectedTrainer.team.length === 0) {
       team.innerHTML = `Team: Trainer currently doesn't have any Pokémon`
       element.appendChild(team)
       const emptyTeam = document.createElement('p')
       emptyTeam.innerHTML = 'Choose up to 6 pokemon from the Pokédex'
       element.appendChild(emptyTeam)
+    } else {
+      this.selectedTrainer.team.forEach((pokemon) => {
+        element.appendChild(pokemon.element)
+      })
     }
   }
 }

@@ -3,6 +3,7 @@ import { TrainerList } from './TrainerList.js'
 import { TrainerRegistrationForm } from './TrainerRegistrationForm.js'
 import { PokedexNameSearchForm } from './PokedexNameSearchForm.js'
 
+const MAX_TEAM_SIZE = 6
 export class App {
   pokedex
   pokedexNameSearchForm
@@ -10,7 +11,10 @@ export class App {
   trainerRegistrationForm
 
   constructor() {
-    this.pokedex = new Pokedex(document.getElementById('pokedex'))
+    this.pokedex = new Pokedex(
+      document.getElementById('pokedex'),
+      this.addPokemonToTeamHandler.bind(this)
+    )
     this.trainerList = new TrainerList(
       document.getElementById('trainer-list'),
       this.showTrainerCard.bind(this)
@@ -43,9 +47,18 @@ export class App {
     this.pokedex.searchByName(event.target.value)
   }
 
-  clearSearch() {
+  clearSearch(event) {
     event.preventDefault()
     this.pokedexNameSearchForm.input.value = ''
     this.pokedex.init()
+  }
+
+  addPokemonToTeamHandler(event) {
+    event.preventDefault()
+    const pokemon = this.pokedex.getPokemonById(Number(event.currentTarget.id))
+    if (this.trainerList.selectedTrainer.team.length < MAX_TEAM_SIZE) {
+      this.trainerList.selectedTrainer.team.push(pokemon)
+      this.trainerList.renderTrainerCard(this.trainerList.selectedTrainer.id)
+    }
   }
 }
