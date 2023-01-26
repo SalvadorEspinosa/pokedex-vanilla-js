@@ -1,4 +1,4 @@
-export class Pokemon {
+export class PokedexEntry {
   data
   element
 

@@ -1,13 +1,13 @@
 import PokemonData from '../data/pokedex.js'
-import { Pokemon } from './Pokemon.js'
+import { PokedexEntry } from './PokedexEntry.js'
 export class Pokedex {
   element
   list = {}
 
   constructor(element, addToTeamHandler) {
     PokemonData.forEach((pokemonData) => {
-      const pokemon = new Pokemon(pokemonData, addToTeamHandler)
-      this.list[pokemon.data.id] = pokemon
+      const entry = new PokedexEntry(pokemonData, addToTeamHandler)
+      this.list[entry.data.id] = entry
     })
     this.element = this.element || element
     this.init()
@@ -34,6 +34,6 @@ export class Pokedex {
   }
 
   getPokemonById(id) {
-    return new Pokemon(this.list[id].data)
+    return new PokedexEntry(this.list[id].data)
   }
 }
