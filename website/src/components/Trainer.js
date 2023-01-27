@@ -25,6 +25,9 @@ export class Trainer {
     const pokemon = new Pokemon(pokemonData, this.removePokemonFromTeamHandler)
     this.team.push(pokemon)
     this.trainerCard.team.appendChild(pokemon.element)
+    const sprite = document.createElement('img')
+    sprite.setAttribute('src', pokemon.data.image.sprite)
+    this.element.appendChild(sprite)
   }
 
   release(pokemonElement) {
@@ -33,6 +36,7 @@ export class Trainer {
     )
     const pokemon = this.team[teamIndex]
     this.team.splice(teamIndex, 1)
-    this.trainerCard.team.removeChild(pokemon.element)
+    pokemon.element.remove()
+    this.element.childNodes[teamIndex + 1].remove()
   }
 }

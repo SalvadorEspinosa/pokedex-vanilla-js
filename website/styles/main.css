@@ -64,9 +64,11 @@ h6 {
   margin: 0.2rem;
   padding: 0.2rem 0.2rem 0.2rem 1.5rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(7, 1fr);
   border: 1px solid #888;
   border-radius: 0.2rem;
+  align-items: center;
+  min-height: 3.4rem;
 }
 
 #trainer-list > li:hover {

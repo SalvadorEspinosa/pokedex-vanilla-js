@@ -40,7 +40,7 @@ export class App {
   }
 
   showTrainerCard(event) {
-    const id = event.target.id
+    const id = event.currentTarget.id
     this.trainerList.renderTrainerCard(id)
   }
 
