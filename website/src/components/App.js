@@ -13,11 +13,12 @@ export class App {
   constructor() {
     this.pokedex = new Pokedex(
       document.getElementById('pokedex'),
-      this.addPokemonToTeamHandler.bind(this)
+      this.addPokemonToTeam.bind(this)
     )
     this.trainerList = new TrainerList(
       document.getElementById('trainer-list'),
-      this.showTrainerCard.bind(this)
+      this.showTrainerCard.bind(this),
+      this.removePokemonFromTeam.bind(this)
     )
     this.trainerList.addNewTrainer('Ash')
     this.trainerRegistrationForm = new TrainerRegistrationForm(
@@ -53,7 +54,7 @@ export class App {
     this.pokedex.init()
   }
 
-  addPokemonToTeamHandler(event) {
+  addPokemonToTeam(event) {
     event.preventDefault()
     const pokemonData = this.pokedex.getPokemonDataById(
       Number(event.currentTarget.id)
@@ -61,5 +62,11 @@ export class App {
     if (this.trainerList.selectedTrainer.team.length < MAX_TEAM_SIZE) {
       this.trainerList.selectedTrainer.choose(pokemonData)
     }
+  }
+
+  removePokemonFromTeam(event) {
+    event.preventDefault()
+    const index = event.currentTarget.parentElement
+    this.trainerList.selectedTrainer.release(index)
   }
 }

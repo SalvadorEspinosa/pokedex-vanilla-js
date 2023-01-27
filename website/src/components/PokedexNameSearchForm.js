@@ -10,7 +10,8 @@ export class PokedexNameSearchForm {
     this.input.setAttribute('id', 'pokemon-name-search')
     this.input.addEventListener('keyup', searchPokemonByNameHandler)
     this.button.addEventListener('click', clearSearchHandler)
-    this.button.innerText = 'X'
+    this.button.innerHTML = '&#9747;'
+    this.button.setAttribute('title', 'Clear Search')
     this.rootElement.appendChild(this.label)
     this.rootElement.appendChild(this.input)
     this.rootElement.appendChild(this.button)

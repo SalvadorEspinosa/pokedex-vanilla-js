@@ -3,15 +3,21 @@ export class TrainerList {
   element
   list = {}
   selectedTrainer
+  removePokemonFromTeamHandler
   showTrainerCardHandler
 
-  constructor(element, showTrainerCardHandler) {
+  constructor(element, showTrainerCardHandler, removePokemonFromTeamHandler) {
     this.element = this.element || element
+    this.removePokemonFromTeamHandler = removePokemonFromTeamHandler
     this.showTrainerCardHandler = showTrainerCardHandler
   }
 
   addNewTrainer(name) {
-    const newTrainer = new Trainer(name, this.showTrainerCardHandler)
+    const newTrainer = new Trainer(
+      name,
+      this.showTrainerCardHandler,
+      this.removePokemonFromTeamHandler
+    )
     this.add(newTrainer)
   }
 

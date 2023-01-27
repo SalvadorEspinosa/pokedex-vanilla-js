@@ -6,6 +6,7 @@ export class TrainerCard {
 
   constructor(trainer) {
     const title = document.createElement('section')
+    title.className = 'section-title'
     this.name.innerText = `${trainer.name}`
     title.appendChild(this.name)
     this.uid.innerText = `UID: ${trainer.id}`
