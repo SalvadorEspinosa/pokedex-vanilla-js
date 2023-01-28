@@ -1,10 +1,11 @@
 export class Pokemon {
   data
-  element = document.createElement('li')
+  trainerCardElement = document.createElement('li')
+  trainerSpriteElement = document.createElement('img')
 
   constructor(data, removePokemonFromTeamHandler) {
     this.data = data
-    this.element.id = this.data.id
+    this.trainerCardElement.id = this.data.id
     const span = document.createElement('span')
     const button = document.createElement('button')
     button.innerHTML = '&#9747;'
@@ -13,8 +14,10 @@ export class Pokemon {
     span.innerText = `${this.data.name.english}`
     const img = document.createElement('img')
     img.setAttribute('src', this.data.image.thumbnail)
-    this.element.appendChild(span)
-    this.element.appendChild(button)
-    this.element.appendChild(img)
+    this.trainerCardElement.appendChild(span)
+    this.trainerCardElement.appendChild(button)
+    this.trainerCardElement.appendChild(img)
+    this.trainerSpriteElement.setAttribute('src', this.data.image.sprite)
+    this.trainerSpriteElement.setAttribute('title', this.data.name.english)
   }
 }

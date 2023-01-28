@@ -1,3 +1,5 @@
+const MAX_NAME_LENGTH = 10
+
 export class TrainerRegistrationForm {
   rootElement = document.getElementById('trainer-registration')
   label = document.createElement('label')
@@ -8,6 +10,7 @@ export class TrainerRegistrationForm {
     this.label.setAttribute('for', 'trainer-name')
     this.label.innerText = 'Trainer Name:'
     this.input.setAttribute('id', 'trainer-name')
+    this.input.setAttribute('maxlength', MAX_NAME_LENGTH)
     this.button.addEventListener('click', registerTrainerHandler)
     this.button.innerText = 'Register Trainer'
     this.rootElement.appendChild(this.label)

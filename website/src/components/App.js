@@ -66,7 +66,7 @@ export class App {
 
   removePokemonFromTeam(event) {
     event.preventDefault()
-    const index = event.currentTarget.parentElement
-    this.trainerList.selectedTrainer.release(index)
+    const element = event.currentTarget.parentElement
+    this.trainerList.selectedTrainer.release(element)
   }
 }

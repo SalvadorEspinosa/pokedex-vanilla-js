@@ -1,8 +1,10 @@
 import { Pokemon } from './Pokemon.js'
 import { TrainerCard } from './TrainerCard.js'
+
+const RELEASE_FROM_TEAM_COUNT = 1
 export class Trainer {
   id
-  element
+  rootElement
   name
   team = []
   trainerCard
@@ -11,32 +13,29 @@ export class Trainer {
 
   constructor(name, showTrainerCardHandler, removePokemonFromTeamHandler) {
     this.id = Date.now()
-    this.element = document.createElement('li')
-    this.element.setAttribute('id', this.id)
-    this.element.innerHTML = name
+    this.rootElement = document.createElement('li')
+    this.rootElement.setAttribute('id', this.id)
+    this.rootElement.innerText = name
     this.name = name
     this.removePokemonFromTeamHandler = removePokemonFromTeamHandler
     this.showTrainerCardHandler = showTrainerCardHandler
-    this.element.addEventListener('click', showTrainerCardHandler)
+    this.rootElement.addEventListener('click', showTrainerCardHandler)
     this.trainerCard = new TrainerCard(this)
   }
 
   choose(pokemonData) {
     const pokemon = new Pokemon(pokemonData, this.removePokemonFromTeamHandler)
     this.team.push(pokemon)
-    this.trainerCard.team.appendChild(pokemon.element)
-    const sprite = document.createElement('img')
-    sprite.setAttribute('src', pokemon.data.image.sprite)
-    this.element.appendChild(sprite)
+    this.trainerCard.team.appendChild(pokemon.trainerCardElement)
+    this.rootElement.appendChild(pokemon.trainerSpriteElement)
   }
 
   release(pokemonElement) {
     const teamIndex = this.team.findIndex(
-      (pokemon) => pokemon.element === pokemonElement
+      (pokemon) => pokemon.trainerCardElement === pokemonElement
     )
-    const pokemon = this.team[teamIndex]
-    this.team.splice(teamIndex, 1)
-    pokemon.element.remove()
-    this.element.childNodes[teamIndex + 1].remove()
+    const [pokemon] = this.team.splice(teamIndex, RELEASE_FROM_TEAM_COUNT)
+    pokemon.trainerCardElement.remove()
+    pokemon.trainerSpriteElement.remove()
   }
 }

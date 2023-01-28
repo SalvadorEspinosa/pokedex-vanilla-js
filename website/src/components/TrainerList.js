@@ -23,13 +23,23 @@ export class TrainerList {
 
   add(trainer) {
     this.list[`${trainer.id}`] = trainer
-    this.element.appendChild(trainer.element)
+    this.element.appendChild(trainer.rootElement)
+    this.renderTrainerCard(`${trainer.id}`)
   }
 
   renderTrainerCard(trainerId) {
     this.selectedTrainer = this.list[trainerId]
     const element = document.getElementById('trainer-card')
-    element.innerHTML = ''
-    element.appendChild(this.selectedTrainer.trainerCard.element)
+    const {
+      childNodes: [firstChildNode],
+    } = element
+    if (firstChildNode) {
+      element.replaceChild(
+        this.selectedTrainer.trainerCard.rootElement,
+        firstChildNode
+      )
+    } else {
+      element.appendChild(this.selectedTrainer.trainerCard.rootElement)
+    }
   }
 }
