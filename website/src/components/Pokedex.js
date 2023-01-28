@@ -15,8 +15,8 @@ export class Pokedex {
   }
 
   searchByName(searchValue) {
-    const searchHits = Object.values(this.list).filter((pokemon) =>
-      pokemon.data.name.english
+    const searchHits = Object.values(this.list).filter((entry) =>
+      entry.data.name.english
         .toLowerCase()
         .startsWith(searchValue.toLowerCase())
     )
@@ -29,8 +29,8 @@ export class Pokedex {
 
   render(list) {
     this.element.innerHTML = ''
-    Object.values(list).forEach((pokemon) => {
-      this.element.appendChild(pokemon.element)
+    Object.values(list).forEach((entry) => {
+      this.element.appendChild(entry.element)
     })
   }
 

@@ -2,7 +2,7 @@ import { Trainer } from './Trainer.js'
 export class TrainerList {
   element
   list = {}
-  selectedTrainer
+  selected
   removePokemonFromTeamHandler
   showTrainerCardHandler
 
@@ -12,7 +12,7 @@ export class TrainerList {
     this.showTrainerCardHandler = showTrainerCardHandler
   }
 
-  addNewTrainer(name) {
+  addNew(name) {
     const newTrainer = new Trainer(
       name,
       this.showTrainerCardHandler,
@@ -24,22 +24,11 @@ export class TrainerList {
   add(trainer) {
     this.list[`${trainer.id}`] = trainer
     this.element.appendChild(trainer.rootElement)
-    this.renderTrainerCard(`${trainer.id}`)
+    this.select(`${trainer.id}`)
+    this.selected.trainerCard.render()
   }
 
-  renderTrainerCard(trainerId) {
-    this.selectedTrainer = this.list[trainerId]
-    const element = document.getElementById('trainer-card')
-    const {
-      childNodes: [firstChildNode],
-    } = element
-    if (firstChildNode) {
-      element.replaceChild(
-        this.selectedTrainer.trainerCard.rootElement,
-        firstChildNode
-      )
-    } else {
-      element.appendChild(this.selectedTrainer.trainerCard.rootElement)
-    }
+  select(trainerId) {
+    this.selected = this.list[trainerId]
   }
 }

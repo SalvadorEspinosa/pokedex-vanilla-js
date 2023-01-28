@@ -7,7 +7,7 @@ const MAX_TEAM_SIZE = 6
 export class App {
   pokedex
   pokedexNameSearchForm
-  trainerList
+  trainers
   trainerRegistrationForm
 
   constructor() {
@@ -15,12 +15,12 @@ export class App {
       document.getElementById('pokedex'),
       this.addPokemonToTeam.bind(this)
     )
-    this.trainerList = new TrainerList(
+    this.trainers = new TrainerList(
       document.getElementById('trainer-list'),
-      this.showTrainerCard.bind(this),
+      this.selectTrainer.bind(this),
       this.removePokemonFromTeam.bind(this)
     )
-    this.trainerList.addNewTrainer('Ash')
+    this.trainers.addNew('Ash')
     this.trainerRegistrationForm = new TrainerRegistrationForm(
       this.registerTrainer.bind(this)
     )
@@ -35,13 +35,15 @@ export class App {
     const name = this.trainerRegistrationForm.input.value
     if (name) {
       this.trainerRegistrationForm.input.value = ''
-      this.trainerList.addNewTrainer(name)
+      this.trainers.addNew(name)
     }
   }
 
-  showTrainerCard(event) {
-    const id = event.currentTarget.id
-    this.trainerList.renderTrainerCard(id)
+  selectTrainer(event) {
+    const id = Number(event.currentTarget.id)
+    if (this.trainers.selected.id === id) return
+    this.trainers.select(id)
+    this.trainers.selected.trainerCard.render()
   }
 
   searchPokemon(event) {
@@ -59,14 +61,14 @@ export class App {
     const pokemonData = this.pokedex.getPokemonDataById(
       Number(event.currentTarget.id)
     )
-    if (this.trainerList.selectedTrainer.team.length < MAX_TEAM_SIZE) {
-      this.trainerList.selectedTrainer.choose(pokemonData)
+    if (this.trainers.selected.team.length < MAX_TEAM_SIZE) {
+      this.trainers.selected.choose(pokemonData)
     }
   }
 
   removePokemonFromTeam(event) {
     event.preventDefault()
-    const element = event.currentTarget.parentElement
-    this.trainerList.selectedTrainer.release(element)
+    const pokemon = event.currentTarget.parentElement
+    this.trainers.selected.release(pokemon)
   }
 }
